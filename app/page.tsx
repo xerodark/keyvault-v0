@@ -1,23 +1,29 @@
-import { redirect } from "next/navigation"
-import { getServerSession } from "next-auth/next"
+import { HeroSection } from "@/components/hero-section"
+import { ProblemSection } from "@/components/problem-section"
+import { SolutionSection } from "@/components/solution-section"
+import { UniqueSection } from "@/components/unique-section"
+import { TeamSection } from "@/components/team-section"
+import { PerformanceSection } from "@/components/performance-section"
+import { ProcessSection } from "@/components/process-section"
+import { ContactSection } from "@/components/contact-section"
+import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
-import { UserDashboard } from "@/components/dashboard/user-dashboard"
-import { authOptions } from "@/lib/auth"
 
-export default async function Dashboard() {
-  const session = await getServerSession(authOptions)
-
-  // If not authenticated, redirect to login
-  if (!session) {
-    redirect("/login")
-  }
-
+export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="min-h-screen bg-gradient-to-b from-black to-zinc-900 text-white overflow-hidden">
       <Header />
-      <main className="flex-1 container py-6">
-        <UserDashboard />
+      <main>
+        <HeroSection />
+        <ProblemSection />
+        <SolutionSection />
+        <UniqueSection />
+        <TeamSection />
+        <ProcessSection />
+        <PerformanceSection />
+        <ContactSection />
       </main>
+      <Footer />
     </div>
   )
 }

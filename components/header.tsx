@@ -1,180 +1,138 @@
 "use client"
 
-import { type FC, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useSession, signOut } from "next-auth/react"
-import { Logo } from "@/components/logo"
 import { Button } from "@/components/ui/button"
-import { Menu, X, Wallet, LogOut, User, Shield } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { useApi } from "@/hooks/use-api"
 
-const navItems = [
-  { name: "Dashboard", href: "/" },
-  { name: "Portfolio", href: "/portfolio" },
-  { name: "Deposit", href: "/deposit" },
-  { name: "Withdraw", href: "/withdraw" },
-  { name: "Settings", href: "/settings" },
-]
-
-export const Header: FC = () => {
-  const pathname = usePathname()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { data: session } = useSession()
-  const { data: userData } = useApi(session?.user?.id ? `/api/user/${session.user.id}` : null)
-  const [isAdmin, setIsAdmin] = useState(false)
+export function Header() {
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    if (userData?.role === "admin") {
-      setIsAdmin(true)
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10)
     }
-  }, [userData])
 
-  const handleConnectWallet = () => {
-    // This is a placeholder for the wallet connection flow
-    alert("Wallet connection is not yet implemented")
-  }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
-  const handleSignOut = () => {
-    signOut({ callbackUrl: "/login" })
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen)
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Logo />
-          <span className="text-xl font-bold">Key Vault</span>
-        </div>
+    <header
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
+        isScrolled ? "bg-black/80 backdrop-blur-md py-3" : "bg-transparent py-5",
+      )}
+    >
+      <div className="container mx-auto px-4 flex items-center justify-between">
+        <Link href="/" className="flex items-center space-x-2">
+          <div className="relative w-8 h-8">
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-orange-600 rounded-md transform rotate-45"></div>
+            <div className="absolute inset-1 bg-black rounded-sm transform rotate-45 flex items-center justify-center">
+              <span className="text-white font-bold text-xs">KV</span>
+            </div>
+          </div>
+          <span className="font-bold text-xl tracking-tight">Key Vault</span>
+        </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === item.href ? "text-primary" : "text-muted-foreground",
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
-          {isAdmin && (
-            <Link
-              href="/admin"
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === "/admin" ? "text-primary" : "text-muted-foreground",
-              )}
-            >
-              Admin
-            </Link>
-          )}
+        <nav className="hidden md:flex items-center space-x-8">
+          <NavLinks />
+          <Button
+            className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-none"
+            size="sm"
+          >
+            Invest Now
+          </Button>
         </nav>
 
-        {/* User Menu / Connect Wallet Button */}
-        {session ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <User className="h-5 w-5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link href="/settings">
-                  <User className="mr-2 h-4 w-4" />
-                  <span>Profile</span>
-                </Link>
-              </DropdownMenuItem>
-              {isAdmin && (
-                <DropdownMenuItem asChild>
-                  <Link href="/admin">
-                    <Shield className="mr-2 h-4 w-4" />
-                    <span>Admin Dashboard</span>
-                  </Link>
-                </DropdownMenuItem>
-              )}
-              <DropdownMenuItem onClick={handleConnectWallet}>
-                <Wallet className="mr-2 h-4 w-4" />
-                <span>Connect Wallet</span>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={handleSignOut}>
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Log out</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <Button className="hidden md:flex items-center gap-2" onClick={handleConnectWallet}>
-            <Wallet className="h-4 w-4" />
-            Connect Wallet
-          </Button>
-        )}
-
         {/* Mobile Menu Button */}
-        <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-          {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </Button>
+        <button className="md:hidden text-white focus:outline-none" onClick={toggleMobileMenu}>
+          {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
       </div>
 
       {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden p-4 pt-0 bg-background border-b border-border/40 animate-fade-in">
-          <nav className="flex flex-col space-y-4 py-4">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary p-2 rounded-md",
-                  pathname === item.href ? "text-primary bg-secondary" : "text-muted-foreground",
-                )}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            {isAdmin && (
-              <Link
-                href="/admin"
-                className={cn(
-                  "text-sm font-medium transition-colors hover:text-primary p-2 rounded-md",
-                  pathname === "/admin" ? "text-primary bg-secondary" : "text-muted-foreground",
-                )}
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Admin
-              </Link>
-            )}
-            {session ? (
-              <Button variant="outline" className="mt-2" onClick={handleSignOut}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Log out
-              </Button>
-            ) : (
-              <Button className="mt-2 w-full flex items-center justify-center gap-2" onClick={handleConnectWallet}>
-                <Wallet className="h-4 w-4" />
-                Connect Wallet
-              </Button>
-            )}
-          </nav>
+      {isMobileMenuOpen && (
+        <div className="md:hidden bg-zinc-900/95 backdrop-blur-md">
+          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
+            <MobileNavLinks closeMenu={() => setIsMobileMenuOpen(false)} />
+            <Button className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-none w-full">
+              Invest Now
+            </Button>
+          </div>
         </div>
       )}
     </header>
+  )
+}
+
+function NavLinks() {
+  return (
+    <>
+      <Link href="#about" className="text-sm text-zinc-300 hover:text-white transition-colors">
+        About
+      </Link>
+      <Link href="#solution" className="text-sm text-zinc-300 hover:text-white transition-colors">
+        Solution
+      </Link>
+      <Link href="#team" className="text-sm text-zinc-300 hover:text-white transition-colors">
+        Team
+      </Link>
+      <Link href="#performance" className="text-sm text-zinc-300 hover:text-white transition-colors">
+        Performance
+      </Link>
+      <Link href="#contact" className="text-sm text-zinc-300 hover:text-white transition-colors">
+        Contact
+      </Link>
+    </>
+  )
+}
+
+function MobileNavLinks({ closeMenu }: { closeMenu: () => void }) {
+  return (
+    <>
+      <Link
+        href="#about"
+        className="text-base py-2 text-zinc-300 hover:text-white transition-colors"
+        onClick={closeMenu}
+      >
+        About
+      </Link>
+      <Link
+        href="#solution"
+        className="text-base py-2 text-zinc-300 hover:text-white transition-colors"
+        onClick={closeMenu}
+      >
+        Solution
+      </Link>
+      <Link
+        href="#team"
+        className="text-base py-2 text-zinc-300 hover:text-white transition-colors"
+        onClick={closeMenu}
+      >
+        Team
+      </Link>
+      <Link
+        href="#performance"
+        className="text-base py-2 text-zinc-300 hover:text-white transition-colors"
+        onClick={closeMenu}
+      >
+        Performance
+      </Link>
+      <Link
+        href="#contact"
+        className="text-base py-2 text-zinc-300 hover:text-white transition-colors"
+        onClick={closeMenu}
+      >
+        Contact
+      </Link>
+    </>
   )
 }

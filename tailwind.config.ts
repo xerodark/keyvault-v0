@@ -53,10 +53,19 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom colors for our theme
         orange: {
-          DEFAULT: "#FF6600",
-          light: "#FF8800",
-          dark: "#CC5200",
+          50: "#fff7ed",
+          100: "#ffedd5",
+          200: "#fed7aa",
+          300: "#fdba74",
+          400: "#fb923c",
+          500: "#f97316",
+          600: "#ea580c",
+          700: "#c2410c",
+          800: "#9a3412",
+          900: "#7c2d12",
+          950: "#431407",
         },
       },
       borderRadius: {
@@ -73,29 +82,10 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        "pulse-glow": {
-          "0%, 100%": {
-            boxShadow: "0 0 15px rgba(255, 102, 0, 0.3)",
-          },
-          "50%": {
-            boxShadow: "0 0 25px rgba(255, 102, 0, 0.5)",
-          },
-        },
-        "fade-in": {
-          from: { opacity: "0" },
-          to: { opacity: "1" },
-        },
-        "slide-up": {
-          from: { transform: "translateY(10px)", opacity: "0" },
-          to: { transform: "translateY(0)", opacity: "1" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "pulse-glow": "pulse-glow 3s infinite",
-        "fade-in": "fade-in 0.5s ease-out",
-        "slide-up": "slide-up 0.5s ease-out",
       },
     },
   },
