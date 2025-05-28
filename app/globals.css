@@ -58,17 +58,241 @@
   }
 }
 
-@keyframes gradient-rotate {
-  0% {
-    --angle: 0deg;
-  }
+/* Orange-Primary Glassmorphism Effects */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(249, 115, 22, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.1);
+}
+
+.glass-strong {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(249, 115, 22, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.15);
+}
+
+.glass-subtle {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: none;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: none;
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.08);
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px 0 rgba(249, 115, 22, 0.15);
+  transform: translateY(-2px);
+}
+
+.glass-button {
+  background: rgba(249, 115, 22, 0.2);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: none;
+  box-shadow: 0 4px 16px 0 rgba(249, 115, 22, 0.25);
+  transition: all 0.3s ease;
+}
+
+.glass-button:hover {
+  background: rgba(249, 115, 22, 0.3);
+  box-shadow: 0 8px 24px 0 rgba(249, 115, 22, 0.35);
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(249, 115, 22, 0.1);
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(249, 115, 22, 0.3);
+  outline: none;
+}
+
+.glass-header {
+  background: rgba(10, 10, 10, 0.5);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: none;
+}
+
+.glass-header-scrolled {
+  background: rgba(10, 10, 10, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+.glass-footer {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+/* Inner glass panels */
+.inner-glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: none;
+  box-shadow: 0 4px 16px 0 rgba(249, 115, 22, 0.05);
+}
+
+/* Highlighted glass panel - primarily orange with subtle purple accent */
+.highlight-glass {
+  background: rgba(249, 115, 22, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: none;
+  box-shadow: 0 4px 16px 0 rgba(249, 115, 22, 0.2);
+}
+
+/* Orange-primary gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #f97316, #ea580c, #c2410c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Purple accent gradient text (minimal use) */
+.gradient-text-accent {
+  background: linear-gradient(135deg, #f97316, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Background patterns */
+.bg-grid-white\/\[0\.02\] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none' stroke='rgb(255,255,255,0.02)'%3e%3cpath d='M0 .5H31.5V32'/%3e%3c/svg%3e");
+}
+
+.bg-dot-white\/\[0\.05\] {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='16' height='16' fill='rgb(255,255,255,0.05)'%3e%3ccircle cx='2' cy='2' r='1'/%3e%3c/svg%3e");
+}
+
+/* Floating animation */
+@keyframes float {
+  0%,
   100% {
-    --angle: 360deg;
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
   }
 }
 
-@property --angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Shimmer effect for glass elements */
+.glass-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-shimmer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(249, 115, 22, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.glass-shimmer:hover::before {
+  left: 100%;
+}
+
+/* Orange-focused glow effects */
+.glass-glow {
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.15), 0 0 0 1px rgba(249, 115, 22, 0.05);
+}
+
+.glass-glow-orange {
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.2);
+}
+
+.glass-glow-purple {
+  box-shadow: 0 8px 32px 0 rgba(168, 85, 247, 0.1);
+}
+
+/* Light Mode Glassmorphism Effects */
+.glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.1);
+}
+
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(249, 115, 22, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.08);
+  transition: all 0.3s ease;
+}
+
+.glass-card-light:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 12px 40px 0 rgba(249, 115, 22, 0.15);
+  transform: translateY(-2px);
+}
+
+.glass-subtle-light {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(249, 115, 22, 0.1);
+}
+
+.inner-glass-light {
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(249, 115, 22, 0.1);
+  box-shadow: 0 4px 16px 0 rgba(249, 115, 22, 0.05);
+}
+
+.highlight-glass-light {
+  background: rgba(249, 115, 22, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(249, 115, 22, 0.2);
+  box-shadow: 0 4px 16px 0 rgba(249, 115, 22, 0.15);
+}
+
+.glass-glow-light {
+  box-shadow: 0 8px 32px 0 rgba(249, 115, 22, 0.12), 0 0 0 1px rgba(249, 115, 22, 0.08);
+}
+
+/* Light mode gradient text */
+.gradient-text-light {
+  background: linear-gradient(135deg, #ea580c, #f97316, #fb923c);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }

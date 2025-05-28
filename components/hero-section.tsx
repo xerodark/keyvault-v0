@@ -1,144 +1,106 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import { Button as DefaultButton } from "@/components/ui/button"
-import { Button as MovingBorderButton } from "@/components/ui/moving-border"
+import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { motion } from "framer-motion"
+import Link from "next/link"
 
 export function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current) return
-
-      const { left, top, width, height } = containerRef.current.getBoundingClientRect()
-      const x = (e.clientX - left) / width
-      const y = (e.clientY - top) / height
-
-      containerRef.current.style.setProperty("--mouse-x", `${x}`)
-      containerRef.current.style.setProperty("--mouse-y", `${y}`)
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [])
-
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{
-        background:
-          "radial-gradient(circle at calc(var(--mouse-x, 0.5) * 100%) calc(var(--mouse-y, 0.5) * 100%), rgba(249, 115, 22, 0.15), transparent 50%)",
-      }}
-    >
-      <div className="absolute inset-0 z-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-[url('/placeholder.svg?height=1080&width=1920')] bg-cover bg-center opacity-10"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black"></div>
-      </div>
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Complex background with orange emphasis */}
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-black to-orange-800/20" />
+      <div className="absolute inset-0 bg-grid-white/[0.02]" />
+      <div className="absolute inset-0 bg-dot-white/[0.05]" />
 
-      <div className="container mx-auto px-4 z-10 pt-20">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Animated background blobs - orange primary */}
+      <div className="absolute top-20 left-20 w-96 h-96 bg-orange-500/40 rounded-full filter blur-3xl animate-pulse" />
+      <div
+        className="absolute bottom-20 right-20 w-96 h-96 bg-orange-600/30 rounded-full filter blur-3xl animate-pulse"
+        style={{ animationDelay: "2s" }}
+      />
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/15 rounded-full filter blur-2xl float" />
+
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col items-center justify-center text-center">
+          {/* Glass badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-6 flex justify-center"
+            transition={{ duration: 0.5 }}
+            className="inline-block px-6 py-2 rounded-full glass mb-8"
           >
-            <MovingBorderButton
-              borderRadius="30px"
-              as="div"
-              containerClassName="w-auto h-auto"
-              className="bg-orange-950/30 text-orange-400 font-medium border-zinc-800 py-2 px-4"
-            >
-              Institutional-Grade Crypto Fund
-            </MovingBorderButton>
+            <span className="gradient-text font-medium">Institutional-Grade Crypto Fund</span>
           </motion.div>
 
+          {/* Main heading */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-zinc-200 to-zinc-400"
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-white leading-tight max-w-5xl"
           >
-            Key Vault Fund
+            Secure Crypto Investment Made <span className="gradient-text">Simple</span>
           </motion.h1>
 
+          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-xl md:text-2xl text-zinc-400 mb-8 max-w-3xl mx-auto"
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl leading-relaxed"
           >
-            Driving Secure Investment Into the Rapidly Growing World of Decentralized Finance
+            Key Vault provides exposure to DeFi through a professionally managed, secure fund structure with{" "}
+            <span className="text-orange-400 font-semibold">15-25% annual returns</span>
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex flex-col sm:flex-row items-center gap-6 mb-16"
           >
-            <DefaultButton
-              size="lg"
-              className="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white border-none px-8 py-6 text-lg rounded-md group"
-            >
+            <Button size="lg" className="glass-button text-white px-10 py-6 text-lg rounded-2xl group">
               Start Investing
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </DefaultButton>
-            <DefaultButton
-              size="lg"
-              variant="outline"
-              className="border-zinc-700 text-white bg-gray-800 hover:bg-zinc-800 px-8 py-6 text-lg rounded-md"
-            >
-              Learn More
-            </DefaultButton>
+              <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
+            </Button>
+            <Link href="/performance">
+              <Button
+                size="lg"
+                variant="outline"
+                className="glass border-orange-500/30 text-white hover:text-white hover:bg-orange-500/10 px-10 py-6 text-lg rounded-2xl"
+              >
+                Learn More
+              </Button>
+            </Link>
           </motion.div>
 
+          {/* Glass stats cards */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 1 }}
-            className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
           >
-            <div className="flex flex-col items-center">
-              <div className="text-3xl font-bold text-orange-400 mb-2">15-25%</div>
-              <div className="text-sm text-zinc-400">Annual Returns</div>
+            <div className="glass-card p-8 rounded-3xl text-center glass-shimmer">
+              <h3 className="text-4xl font-bold gradient-text mb-2">15-25%</h3>
+              <p className="text-white/70 text-lg">Annual Returns</p>
             </div>
-            <div className="flex flex-col items-center">
-              <div className="text-3xl font-bold text-orange-400 mb-2">$4M+</div>
-              <div className="text-sm text-zinc-400">Assets Under Management</div>
+            <div className="glass-card p-8 rounded-3xl text-center glass-shimmer">
+              <h3 className="text-4xl font-bold gradient-text mb-2">2-7%</h3>
+              <p className="text-white/70 text-lg">Annual Volatility</p>
             </div>
-            <div className="flex flex-col items-center">
-              <div className="text-3xl font-bold text-orange-400 mb-2">~2-7%</div>
-              <div className="text-sm text-zinc-400">Annual Volatility</div>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="text-3xl font-bold text-orange-400 mb-2">8.6-17.9</div>
-              <div className="text-sm text-zinc-400">Sharpe Ratio</div>
+            <div className="glass-card p-8 rounded-3xl text-center glass-shimmer">
+              <h3 className="text-4xl font-bold gradient-text mb-2">8.6-17.9</h3>
+              <p className="text-white/70 text-lg">Sharpe Ratio</p>
             </div>
           </motion.div>
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-10">
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 1.5,
-            delay: 1.2,
-            repeat: Number.POSITIVE_INFINITY,
-            repeatType: "reverse",
-          }}
-        >
-          <div className="w-6 h-10 border-2 border-zinc-500 rounded-full flex justify-center">
-            <div className="w-1 h-2 bg-zinc-400 rounded-full mt-2"></div>
-          </div>
-        </motion.div>
-      </div>
+      {/* Scroll indicator */}
+      {/* Removing scroll indicator as per instructions */}
     </section>
   )
 }
