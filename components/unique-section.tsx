@@ -100,7 +100,7 @@ export function UniqueSection() {
                 <div className="space-y-3">
                   <div className="p-3 bg-zinc-800/60 rounded-md">
                     <p className="text-zinc-300">Bitcoin Buy & Hold</p>
-                    <p className="text-zinc-500 text-sm">~70-80% Annual Volatility</p>
+                    <p className="text-zinc-500 text-sm">~70 - 80% Annual Volatility</p>
                   </div>
                   <div className="p-3 bg-zinc-800/60 rounded-md">
                     <p className="text-zinc-300">Unhedged Diverse Portfolio</p>
@@ -108,7 +108,7 @@ export function UniqueSection() {
                   </div>
                   <div className="p-3 bg-orange-900/20 border border-orange-500/20 rounded-md">
                     <p className="text-orange-400 font-medium">Key Vault Strategy</p>
-                    <p className="text-orange-500/80 text-sm">~2-7% Annual Volatility ✅</p>
+                    <p className="text-orange-500/80 text-sm">~2 - 7% Annual Volatility ✅</p>
                   </div>
                 </div>
               </div>

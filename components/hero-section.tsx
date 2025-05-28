@@ -7,7 +7,7 @@ import Link from "next/link"
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20 md:pt-24 lg:pt-0">
       {/* Complex background with orange emphasis */}
       <div className="absolute inset-0 bg-gradient-to-br from-orange-900/30 via-black to-orange-800/20" />
       <div className="absolute inset-0 bg-grid-white/[0.02]" />
@@ -21,8 +21,8 @@ export function HeroSection() {
       />
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/15 rounded-full filter blur-2xl float" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="flex flex-col items-center justify-center text-center">
+      <div className="container mx-auto px-4 py-8 md:py-12 lg:py-0 relative z-10">
+        <div className="flex flex-col items-center justify-center text-center min-h-[calc(100vh-5rem)] md:min-h-[calc(100vh-6rem)] lg:min-h-screen">
           {/* Glass badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -38,7 +38,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold mb-8 text-white leading-tight max-w-5xl"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 text-white leading-tight max-w-5xl"
           >
             Secure Crypto Investment Made <span className="gradient-text">Simple</span>
           </motion.h1>
@@ -48,7 +48,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl leading-relaxed"
+            className="text-lg md:text-xl lg:text-2xl text-white/80 mb-8 md:mb-12 max-w-3xl leading-relaxed px-4 md:px-0"
           >
             Key Vault provides exposure to DeFi through a professionally managed, secure fund structure with{" "}
             <span className="text-orange-400 font-semibold">15-25% annual returns</span>
@@ -59,7 +59,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center gap-6 mb-16"
+            className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 mb-8 md:mb-16"
           >
             <Button size="lg" className="glass-button text-white px-10 py-6 text-lg rounded-2xl group">
               Start Investing
@@ -81,7 +81,7 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
+            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto px-4 md:px-0"
           >
             <div className="glass-card p-8 rounded-3xl text-center glass-shimmer">
               <h3 className="text-4xl font-bold gradient-text mb-2">15-25%</h3>
@@ -98,9 +98,6 @@ export function HeroSection() {
           </motion.div>
         </div>
       </div>
-
-      {/* Scroll indicator */}
-      {/* Removing scroll indicator as per instructions */}
     </section>
   )
 }

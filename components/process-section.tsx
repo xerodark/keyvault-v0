@@ -115,7 +115,7 @@ export function ProcessSection() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-orange-400 font-medium">Key Vault Strategy</span>
-                  <span className="text-orange-400 font-medium">~8.6-17.9 Sharpe Ratio ✅</span>
+                  <span className="text-orange-400 font-medium">~8.6 - 17.9 Sharpe Ratio</span>
                 </div>
               </div>
             </div>

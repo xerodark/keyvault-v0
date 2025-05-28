@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ShieldCheckIcon, ChartBarIcon, ClockIcon, BoltIcon } from "@heroicons/react/24/outline"
+import { ShieldCheckIcon, ChartBarIcon, ClockIcon, BoltIcon, Check } from "@heroicons/react/24/outline"
 
 export function FeaturesSection() {
   const features = [
@@ -111,23 +111,42 @@ export function FeaturesSection() {
               </p>
             </div>
 
-            <div className="lg:w-1/2 p-8">
-              <h4 className="font-bold mb-6 text-center text-gray-900 text-xl">Risk-Adjusted Return</h4>
-              <div className="space-y-6">
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Bitcoin Buy & Hold</span>
-                  <span className="text-gray-900 font-medium">~1 Sharpe Ratio</span>
+            <div className="w-full lg:w-1/2 p-4 sm:p-8">
+              <h4 className="font-bold mb-4 sm:mb-6 text-center text-gray-900 text-lg sm:text-xl">
+                Risk-Adjusted Return
+              </h4>
+              <div className="space-y-4 sm:space-y-6">
+                {/* Bitcoin Buy & Hold */}
+                <div className="flex flex-col sm:flex-row justify-between items-center sm:items-baseline">
+                  <span className="text-gray-600 text-base sm:text-lg text-center sm:text-left">
+                    Bitcoin Buy &amp; Hold
+                  </span>
+                  <span className="text-gray-900 font-medium text-base sm:text-lg text-center sm:text-right">
+                    ~1 Sharpe Ratio
+                  </span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-gray-600">Unhedged Diverse Portfolio</span>
-                  <span className="text-gray-900 font-medium">~1.08 Sharpe Ratio</span>
+                {/* Unhedged Diverse Portfolio */}
+                <div className="flex flex-col sm:flex-row justify-between items-center sm:items-baseline">
+                  <span className="text-gray-600 text-base sm:text-lg text-center sm:text-left">
+                    Unhedged Diverse Portfolio
+                  </span>
+                  <span className="text-gray-900 font-medium text-base sm:text-lg text-center sm:text-right">
+                    ~1.08 Sharpe Ratio
+                  </span>
                 </div>
-                <div className="flex justify-between items-center p-4 highlight-glass-light rounded-xl">
-                  <span className="text-orange-600 font-bold">Key Vault Strategy</span>
-                  <span className="gradient-text-light font-bold">~8.6-17.9 Sharpe Ratio ✅</span>
+                {/* Key Vault Strategy Highlight */}
+                <div className="flex flex-col sm:flex-row justify-between items-center sm:items-baseline p-3 sm:p-4 highlight-glass-light rounded-xl">
+                  <span className="flex items-center text-orange-600 font-bold text-base sm:text-lg text-center sm:text-left">
+                    <span className="inline-block w-2 h-2 bg-orange-600 rounded-sm mr-2"></span>
+                    Key Vault Strategy
+                  </span>
+                  <span className="gradient-text-light font-bold text-base sm:text-lg text-center sm:text-right">
+                    ~8.6-17.9 Sharpe Ratio
+                  </span>
                 </div>
               </div>
             </div>
+
           </div>
         </motion.div>
       </div>

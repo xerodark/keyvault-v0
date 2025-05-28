@@ -11,7 +11,7 @@ export function TeamSection() {
       name: "Brett Nielsen",
       title: "CEO",
       email: "brett@keyvaultfund.com",
-      linkedin: "brettnielsen",
+      linkedin: "brettknielsen",
       image: "/images/2.png",
       bio: [
         "Private Equity Operating Partner at Portco CEO with KSV Global",

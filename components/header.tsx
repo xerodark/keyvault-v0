@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { motion } from "framer-motion"
+import Image from "next/image"
 
 export function Header() {
   const [scrollY, setScrollY] = useState(0)
@@ -42,7 +43,7 @@ export function Header() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out",
-        isScrolled ? "py-3" : "py-5",
+        isScrolled ? "py-2" : "py-4",
       )}
       style={{
         background: `rgba(10, 10, 10, ${backgroundOpacity * 0.8})`,
@@ -51,16 +52,19 @@ export function Header() {
         borderBottom: backgroundOpacity > 0.5 ? `1px solid rgba(255, 255, 255, ${backgroundOpacity * 0.1})` : "none",
       }}
     >
-      <div className="container mx-auto px-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 flex items-center justify-between h-16">
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }}>
-          <Link href="/" className="flex items-center space-x-3">
-            <div className="relative w-10 h-10">
-              <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-purple-600 rounded-xl transform rotate-45"></div>
-              <div className="absolute inset-1 bg-black/80 rounded-lg transform rotate-45 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">KV</span>
-              </div>
+          <Link href="/" className="flex items-center">
+            <div className="relative h-55 w-auto flex items-center">
+              <Image
+                src="/images/8.png"
+                alt="Key Vault Logo"
+                width={300}
+                height={80}
+                className="object-contain h-full w-auto max-h-45"
+                priority
+              />
             </div>
-            <span className="font-bold text-2xl tracking-tight text-white">Key Vault</span>
           </Link>
         </motion.div>
 
