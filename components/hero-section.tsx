@@ -1,3 +1,5 @@
+// HeroSection.tsx
+
 "use client"
 
 import { Button } from "@/components/ui/button"
@@ -61,10 +63,12 @@ export function HeroSection() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 mb-8 md:mb-16"
           >
-            <Button size="lg" className="glass-button text-white px-10 py-6 text-lg rounded-2xl group">
-              {"Investor PortalInvestor Portal\nInvestor PortalInvestor PortaInvestor PorInvestor PInvestor InvestorInvestoInvestInvI"}
-              <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
-            </Button>
+            <Link href="/investor-portal">
+              <Button size="lg" className="glass-button text-white px-10 py-6 text-lg rounded-2xl group">
+                Investor Portal
+                <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </Link>
             <Link href="/performance">
               <Button
                 size="lg"
@@ -75,5 +79,8 @@ export function HeroSection() {
               </Button>
             </Link>
           </motion.div>
-
-          {/* Glass stats cards */}
+        </div>
+      </div>
+    </section>
+  )
+}
