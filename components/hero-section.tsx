@@ -62,7 +62,7 @@ export function HeroSection() {
             className="flex flex-col sm:flex-row items-center gap-4 md:gap-6 mb-8 md:mb-16"
           >
             <Button size="lg" className="glass-button text-white px-10 py-6 text-lg rounded-2xl group">
-              Start Investing
+              {"Investor PortalInvestor Portal\nInvestor PortalInvestor PortaInvestor PorInvestor PInvestor InvestorInvestoInvestInvI"}
               <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
             </Button>
             <Link href="/performance">
@@ -77,27 +77,3 @@ export function HeroSection() {
           </motion.div>
 
           {/* Glass stats cards */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-4xl mx-auto px-4 md:px-0"
-          >
-            <div className="glass-card p-8 rounded-3xl text-center glass-shimmer">
-              <h3 className="text-4xl font-bold gradient-text mb-2">15-25%</h3>
-              <p className="text-white/70 text-lg">Annual Returns</p>
-            </div>
-            <div className="glass-card p-8 rounded-3xl text-center glass-shimmer">
-              <h3 className="text-4xl font-bold gradient-text mb-2">2-7%</h3>
-              <p className="text-white/70 text-lg">Annual Volatility</p>
-            </div>
-            <div className="glass-card p-8 rounded-3xl text-center glass-shimmer">
-              <h3 className="text-4xl font-bold gradient-text mb-2">8.6-17.9</h3>
-              <p className="text-white/70 text-lg">Sharpe Ratio</p>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  )
-}
